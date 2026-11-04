@@ -85,3 +85,56 @@ promocoes.rename(columns={
    'is_active': 'esta_ativo'                      
 }, inplace=True)
 
+## Verificação da integridade e dos relacionamentos entre os datasets
+
+print('--- Produtos → Categorias ---')
+print('Referências sem correspondência:',
+      (~produtos['id_categoria'].isin(categorias['id_categoria'])).sum())
+
+print('\n--- Pedidos → Clientes ---')
+print('Referências sem correspondência:',
+      (~pedidos['id_cliente'].isin(clientes['id_cliente'])).sum())
+
+print('\n--- Itens → Produtos ---')
+print('Referências sem correspondência:',
+      (~itens_pedidos['id_produto'].isin(produtos['id_produto'])).sum())
+
+print('\n--- Itens → Pedidos ---')
+print('Referências sem correspondência:',
+      (~itens_pedidos['id_pedido'].isin(pedidos['id_pedido'])).sum())
+
+print('\n--- Promoções → Produtos ---')
+print('Referências sem correspondência:',
+      (~promocoes['id_produto'].isin(produtos['id_produto'])).sum())
+
+## Verificação de valores duplicados e nulos
+
+print('--- Categorias ---')
+print('Duplicados:', categorias.duplicated().sum())
+print('Valores nulos:')
+print(categorias.isna().sum())
+
+print('\n--- Clientes ---')
+print('Duplicados:', clientes.duplicated().sum())
+print('Valores nulos:')
+print(clientes.isna().sum())
+
+print('\n--- Itens dos pedidos ---')
+print('Duplicados:', itens_pedidos.duplicated().sum())
+print('Valores nulos:')
+print(itens_pedidos.isna().sum())
+
+print('\n--- Pedidos ---')
+print('Duplicados:', pedidos.duplicated().sum())
+print('Valores nulos:')
+print(pedidos.isna().sum())
+
+print('\n--- Produtos ---')
+print('Duplicados:', produtos.duplicated().sum())
+print('Valores nulos:')
+print(produtos.isna().sum())
+
+print('\n--- Promoções ---')
+print('Duplicados:', promocoes.duplicated().sum())
+print('Valores nulos:')
+print(promocoes.isna().sum())
