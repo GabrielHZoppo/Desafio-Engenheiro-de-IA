@@ -43,11 +43,34 @@ A coluna `notes`, presente no dataset de pedidos, foi removida inicialmente por 
 
 Outras colunas e informações ainda poderão passar por avaliação durante as próximas etapas do desenvolvimento.
 
-### 1.4. Próximas etapas
+### 1.4. Verificação da qualidade e integridade dos dados
+*Data Quality and Integrity Validation*
+
+Foram realizadas verificações iniciais nos seis datasets utilizando Pandas, com o objetivo de identificar possíveis inconsistências antes da implementação das funcionalidades do chatbot.
+
+As verificações incluíram:
+
+- **Valores duplicados:** identificação de registros integralmente duplicados e verificação de duplicidade nos identificadores principais das tabelas.
+- **Valores ausentes:** identificação da quantidade de valores nulos por dataset e por coluna.
+- **Integridade referencial:** verificação da correspondência entre os identificadores relacionados nas diferentes tabelas.
+
+Os valores ausentes foram avaliados considerando o contexto de cada informação. Algumas ausências são esperadas, pois determinadas colunas dependem do status do pedido, como informações de cancelamento e entrega.
+
+Também foram verificados os seguintes relacionamentos:
+
+| Tabela de origem | Tabela relacionada | Identificador |
+|---|---|---|
+| Produtos | Categorias | `id_categoria` |
+| Pedidos | Clientes | `id_cliente` |
+| Itens dos pedidos | Produtos | `id_produto` |
+| Itens dos pedidos | Pedidos | `id_pedido` |
+| Promoções | Produtos | `id_produto` |
+
+### 1.5. Próximas etapas
 *Next Steps*
 
-- Análise e tratamento de valores ausentes.
-- Verificação da integridade e dos relacionamentos entre os datasets.
+- Avaliação de eventuais inconsistências identificadas nas verificações.
+- Análise e tratamento dos valores ausentes que realmente necessitem de correção.
 - Avaliação da relevância das informações disponíveis para o atendimento ao cliente.
 - Desenvolvimento das funções responsáveis pela consulta aos dados.
 
